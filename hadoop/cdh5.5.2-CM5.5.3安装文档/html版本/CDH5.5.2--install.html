@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)file:///C:/Users/WL/AppData/Local/Temp/MarkdownPadPreview.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CDH5.5.2--install</title>
+
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+<!--<base href="file:\\\C:\Users\WL\Downloads\hadoop\hadoop\新建文件夹\cdh5.5.2-CM5.5.3安装文档\">--><base href=".">
+</head>
+<body>
+<h1>CDH5.5环境搭建</h1>
+<h2>（一）	简介</h2>
+<h4>CDH is the most complete, tested, and popular distribution of Apache Hadoop and related projects. CDH delivers the core elements of Hadoop – scalable storage and distributed computing – along with a Web-based user interface and vital enterprise capabilities. CDH is Apache-licensed open source and is the only Hadoop solution to offer unified batch processing, interactive SQL and interactive search, and role-based access controls</h4>
+<p><img src="./CDH5.5.2--install_files/111.png">  
+</p>
+<h2>（二）	系统要求以及版本支持</h2>
+<h3>1 操作系统的要求（与RHEL兼容系列）</h3>
+<h4><p></p><table border="1">
+<tbody><tr>
+      <th colspan="4">Red Hat Enterprise Linux and CentOS, 64-bit</th>
+   </tr>
+   <tr>
+      <td>5.10</td>
+      <td>5.7</td>
+      <td>6.4</td>
+      <td>6.5</td>
+   </tr>
+   <tr>
+      <td>6.5 in SE Linux mode</td>
+      <td>6.6</td>
+      <td>6.6 in SE Linux mode</td>
+      <td>6.7</td>
+   </tr>
+</tbody></table>  
+<p></p>
+</h4><h6><em>    <font color="red">注意：</font></em>a 如果是RHEL7系列，只支持7.1版本，不支持7.0</h6>
+<h6>          b RHEL7.1版本必须是新安装，从低版本升级到7.1是不允许的。</h6>
+<h3>2 JDK版本的要求</h3>
+<h4><p></p><table>
+<tbody><tr>
+      <td>CDH Version Managed</td>
+      <td>Minimum Supported JDK Version</td>
+      <td>Recommended JDK Version</td>
+   </tr>
+   <tr>
+      <td rowspan="2">CDH 5</td>
+      <td>1.7.0<em>55</em></td>
+      <td>1.7.067 1.7.0<em>75 1.7.0<em>80</em></em></td>
+   </tr>
+   <tr>
+      <td>1.8.031 官方不建议使用1.8.040</td>
+      <td>1.8.0_60</td>
+   </tr>
+</tbody></table><p></p>
+</h4><h3>3 浏览器的支持（浏览器是管理员用来安装、配置、管理以及监控服务的交互工具）</h3>
+<ul>
+<li><p>火狐（24和31）</p></li>
+<li><p>Google Chrome(36及更高版本）</p></li>
+<li><p>IE（9及更高）</p></li>
+<li><p>Safari（5及更高）</p></li>    
+</ul> 
+<h3>4 对数据库的支持(<a href="http://www.cloudera.com/documentation/enterprise/5-5-x/topics/cdh_ig_req_supported_versions.html#topic_2">详见官网</a>)</h3>
+<h4>    CM支持多种数据库，关于服务的配置、角色的分配、配置的历史记录以及正在运行的程序等等，Cloudera Manager Server将这些信息都存储在自己的数据库中。</h4>
+<table><tbody><tr><td>MariaDB 5.5</td><td>MySQL - 5.1, 5.5 and 5.6</td><td>Oracle 11gR2 and 12c </td><td>PostgreSQL - 8.1, 8.3, 8.4, 9.1, 9.2, 9.3, and 9.4</td></tr></tbody></table>
+<h6>    <em><font color="red">注意：</font></em> 1  当程序重启时，每一个重新部署的服务均从数据库中读取相关信息。如果数据库服务处于异常状态，将导致整个集群无法启动或是出现异常。所以应对数据库进行周期性地备份，以便在数据出现丢失时能够得以恢复。</h6>
+<h6>           2  对于选用的数据库，必须配置使其支持UTF8编码</h6>
+<h3>5 系统资源要求</h3>
+<ul>
+<li>
+磁盘的要求
+<ul>
+<li>
+Cloudera Manager Server    
+
+<ul>
+<li>/var所在分区至少5GB  
+</li>
+<li>/usr所在分区至少500MB  
+</li>
+</ul>
+</li>
+<li>
+Cloudera Management Service
+<ul>
+<li>关于主机的和服务的监控，这些信息都存储在数据库中。所以数据库所在分区（/var）至少保证20GB。<a href="http://www.cloudera.com/documentation/enterprise/5-5-x/topics/cm_ig_storage.html#xd_583c10bfdbd326ba--6eed2fb8-14349d04bee--7b12">更多官方参考</a></li>
+</ul>
+</li>
+<li>
+Agents
+<ul>
+<li>对于每一个代理节点，解包下载文件时至少需要三倍的下载文件大小的空间。默认情况解包的路径是 /opt/cloudera/parcels</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+内存要求
+<ul>
+<li>大多情况下推荐为4GB（对于Oracle数据库而言是必需的）。</li>
+<li>当然对于少于100个节点，且采用非Oracle数据库时，2GB也是可以的。但此时必需要调低系统最大堆大小（通过修改 /etc/default/cloudera-scm-server 文件中的 -Xmx 参数）  
+</li>
+</ul>
+</li>
+<li>
+Python
+<ul>
+<li>Cloudera Manager 和 CDH 4 要求 Python 2.4及更高版本，但是 CDH5中的Hue及CDH5中的安装包要求 Python 2.6或是2.7.</li>
+</ul>
+</li>
+<li>
+Perl 
+<ul>
+<li>Cloudera Manager 也需要perl的支持。</li>
+</ul>
+</li>
+</ul>
+<h3>6 网络以及安全要求</h3>
+<h5>  集群部署中的每一台机器必需要满足一下网络和安全要求</h5>
+<ul>
+<li>
+ 集群中务必有提供DNS服务，并正确配置机器的 /etc/hosts 文件。所有节点必需能够进行域名的正向解析及反向解析。 /etc/hosts 文件应满足一下条件  
+
+<ul>
+<li>拥有所有节点的域名及IP地址信息  
+</li>
+<li>不包含大写域名  
+</li>
+<li>不包含重复IP地址</li>
+<li>无论是在 hosts文件还是DNS服务中，均不使用别名。</li>
+</ul>
+</li>
+<li> 多数情况下, Cloudera Manager Server在安装或是升级时，必需能SSH连接集群中的节点。能够通过root账号登录，或是拥有无需密码进行sudo提权的账户。当集群安装完毕时，可以关闭对节点的登录授权。Cloudera Manager Server也不会保有关于SSH的认证信息，并且这些认证信息会自动清除（<a href="http://www.cloudera.com/documentation/enterprise/5-5-x/topics/cm_ig_permissions.html#xd_583c10bfdbd326ba--6eed2fb8-14349d04bee--7eb1">更多相关信息</a>）</li>
+<li>必需关闭IPv6</li>
+</ul>
+<h2>（三）准备工作</h2>
+<h3>1 关闭系统的 Selinux + Iptables （所有节点）</h3>
+<h3>2 定位集群中作为Namenode的节点，配置使其可以免密码登录集群中所有节点</h3>
+<h3>3 修改集群中所有节点的主机名，并同步更新集群中所有节点的hosts文件</h3>
+<h3>4 卸载系统自带OPEN-JDK（所有节点）</h3>
+<ul>
+<li>
+安装好的Centos系统有时会自动安装OpenJdk，用命令java -version查看：  
+
+<ul>
+<li>java version "1.6.0"<br>
+OpenJDK Runtime Environment (build 1.6.0-b09)<br>
+OpenJDK 64-Bit Server VM (build 1.6.0-b09, mixed mode)  
+</li>
+</ul>
+</li>
+<li>
+如有上述显示，说明系统里已经有OpenJdk，执行以下命令查看系统中有哪些OpenJdk相关包：  
+
+<ul>
+<li>rpm -qa | grep java</li>
+</ul>
+</li>
+<li>
+其中有如下包必须卸载，根据系统版本不同，各个包版本号会有所差异：
+<ul>
+<li>java-1.5.0-gcj-1.5.0.0-29.1.el6.x86_64</li>
+<li>java-1.6.0-openjdk-1.6.0.0-1.66.1.13.0.el6.x86_64  
+</li>
+<li>java-1.6.0-openjdk-devel-1.6.0.0-1.66.1.13.0.el6.x86_64  
+</li>
+</ul>
+</li>
+<li>
+执行以下命令，卸载：  
+
+<ul>
+<li>rpm -e --nodeps java-1.5.0-gcj-1.5.0.0-29.1.el6.x86_64  
+</li>
+<li>rpm -e --nodeps java-1.6.0-openjdk-1.6.0.0-1.66.1.13.0.el6  
+</li>
+<li>rpm -e --nodeps java-1.6.0-openjdk-devel-1.6.0.0-1.66.1.13.0.el6.x86_64 </li>
+</ul>
+</li>
+</ul>
+<h3>5 安装JDK（所有节点）</h3>
+<ol>
+<li>从官网下载适合的jdk压缩包，版本根据上面进行选择</li>
+<li>创建  /usr/java  目录，并将下载的压缩包解压到此路径。</li>
+<li>创建软连接，如下图所示
+  <img src="./CDH5.5.2--install_files/2.png">  
+</li>
+<li>修改系统环境变量，使jdk生效<br>
+  <img src="./CDH5.5.2--install_files/3.png"></li>
+</ol>
+<h3>6 安装集群内网NTP服务，使所有节点保持时间同步</h3>
+<h3>7 数据库的安装，本次安装采用Mysql</h3>
+<ol>
+<li>Mysql的安装不再介绍</li>
+<li>设置Mysql为开机启动，命令：chkconfig mysqld on</li>
+<li>此次安装需要创建的数据库如下<br>
+3.1  --hive数据库<br>
+create database hive DEFAULT CHARSET utf8 COLLATE utf8<em>general</em>ci<br>
+3.2  --集群监控数据库<br>
+create database amon DEFAULT CHARSET utf8 COLLATE utf8<em>general<em>ci <br>
+3.3  --hue数据库<br>
+create database oozie DEFAULT CHARSET utf8 COLLATE utf8</em>general</em>ci  
+</li>
+<li>给用户授权（这里密码设为hadoop）<br>
+4.1  grant all on <em>.</em> to root@"%" Identified by "hadoop";</li>
+</ol>
+<h2>（四）正式安装</h2>
+<h4>一 Cloudera Manager Server 及 Agent 的安装</h4>
+<ol>
+<li>此次安装采用离线安装方式，故提前准备好所需文件。<br>
+1.1  <a href="http://archive-primary.cloudera.com/cdh5/parcels/5.5.2/">官方Parcles下载地址</a>   <br>
+1.2  Parcels下载目标 CDH-5.5.2-1.cdh5.5.2.p0.4-el6.parcel   	CDH-5.5.2-1.cdh5.5.2.p0.4-el6.parcel.sha1  manifest.json<br>
+1.3  <a href="http://archive-primary.cloudera.com/cm5/cm/5/">官方CM下载地址</a><br>
+1.4  CM下载目标 cloudera-manager-centos7-cm5.5.2<em>x86</em>64.tar.gz<br>
+1.5  下载 mysql 的JDBC 驱动包，此次安装采用 mysql-connector-java-5.1.38-bin.jar</li>
+<li>完成上一步后，针对cloudera官网的访问通信不再有要求。但是仍然需要连结yum源，以解决后续的依赖问题。  
+</li>
+<li>将1.4指定的下载文件解压到 /opt 目录下，因为cdh5的源会默认在/opt/cloudera/parcel-repo寻找</li>
+<li>
+给所有节点添加cloudera-scm（默认）用户   
+
+<ul>
+<li>命令： useradd --system --home=/opt/cm-5.5.2/run/cloudera-scm-server --no-create-home --shell=/bin/false --comment "Cloudera SCM User" cloudera-scm</li>
+</ul>
+</li>
+<li>
+修改server_host变量  
+
+<ul>
+<li>将文件/opt/cm-5.5.2/etc/cloudera-scm-agent/config.ini中这个变量的值修改为 CMS 的主机名  
+</li>
+</ul>
+</li>
+<li>将1.5的下载文件复制到 /opt/cm-5.5.2/share/cmf/lib/ 目录中</li>
+<li>分发 /opt/cm-5.5.2 文件到所有节点</li>
+<li>为Cloudera Manager 5建立数据库：<br>
+8.1  执行命令： /opt/cm-5.5.2/share/cmf/schema/scm<em>prepare</em>database.sh mysql -h localhost -u root -phadoop --scm-host localhost scm scm scm  
+</li>
+<li><font color="#0099ff">开启Cloudera Manager 5 Server端：</font><br>
+9.1  /opt/cm-5.5.2/etc/init.d/cloudera-scm-server start<br>
+9.2  <font color="red"><em>注意</em></font>  server首次启动不要立即关闭或重启，因为首次启动会自动创建相关表以及数据，如果因为特殊原因中途退出，请先删除所有表以及数据之后再次启动，否则将会出现启动不成功的情况。   
+</li>
+<li><font color="#0099ff">开启Cloudera Manager 5 Agents端：</font>   <br>
+10.1  /opt/cm-5.5.2/etc/init.d/cloudera-scm-agent  start  
+</li>
+</ol>
+<p><br>浏览器启动Cloudera Manager 5 控制台（默认端口号是7180），启动成功就会看到登陆页面。<br></p>
+<p><h style="background:red"><font bgcolor="red" color="yellow">默认用户名：admin 密码：admin </font></h>
+<img src="./CDH5.5.2--install_files/4.png"></p>
+<h4>二 CDH5.5.2安装</h4>
+<ol>
+<li>制作本地的CDH源<br>
+1.1 将 1.2 下载的文件放到master节点的/opt/cloudera/parcel-repo目录下<br>
+1.2 修改 后缀文件名为 .sha1 为 .sha</li>
+<li>开始正式安装CDH到集群，由于 Cloudera Manager 对中文支持很好，下面主要以图片为主<br>
+2.1 Cloudera Manager 提供了三种选项，毫无疑问 <font color="red">免费</font> 是我们的首选<br>
+<img src="./CDH5.5.2--install_files/5.png"><br>
+2.2 继续之后，就可以看到我们集群中的节点已经准备就绪
+<img src="./CDH5.5.2--install_files/6.png"><br>
+2.3 继续之后，Cloudera Manager 会将安装文件分发至各个节点
+<img src="./CDH5.5.2--install_files/7.png">
+2.4 集群处于局域网环境，分发速度还是可以的
+<img src="./CDH5.5.2--install_files/8.png">
+2.5 解压缩Parcels文件
+<img src="./CDH5.5.2--install_files/9.png">
+2.6 激活各节点
+<img src="./CDH5.5.2--install_files/10.png">
+2.7 进行各节点的健康检查，提示信息也很直观<br>
+<img src="./CDH5.5.2--install_files/11.png"><br>
+      2.7.1 对于第一个黄色标示，在各节点执行命令： echo 'vm.swappiness = 0' &gt;&gt; /etc/sysctl.conf ;   sysctl -p<br>
+      2.7.2 对于第二个黄色标示，在各节点执行命令： echo never &gt; /sys/kernel/mm/redhat<em>transparent</em>hugepage/defrag<br>
+      2.7.3 正确从官方下载 对应版本的 jdk，不会出现第三个标示<br>
+2.8 选择安装服务，具体可针对自己的业务需求进行自主选择。
+<img src="./CDH5.5.2--install_files/12.png">
+2.9  根据集群中各节点的配置，Cloudera会给出一个推荐的配置选项，根据具体情况可进行相应修改
+<img src="./CDH5.5.2--install_files/13.png">
+2.10 前面已经配置好数据库，此步直接进行测试连接即可
+<img src="./CDH5.5.2--install_files/14.png">
+2.11 继续之后便开始安装选定的各个服务，时间稍长，等待即可。
+<img src="./CDH5.5.2--install_files/15.png"><br>
+<font color="red" size="4">至此，CDH便安装完成 !</font>  
+</li>
+</ol>
+<h4>三 安装过程问题汇总</h4>
+<hr>
+<h5>1  <font color="red">Q:  </font>Cloudera Manager Server 无法启动</h5>
+<h5>   <font color="red">A:  </font>数据的引擎是否为 Innodb（注意 这是必须的）。Yum安装的方式默认是不支持的，需要手动编译。具体编译方式不是本文重点，不在此详谈。</h5>
+<h5>2  <font color="red">Q:  </font>Cloudera Manager Server 无法检测 Agent信号</h5>
+<h5>   <font color="red">A:  </font>Agent端的配置文件中是否修改了server_host变量</h5>
+<h5>3  <font color="red">Q:  </font>Agent 始终无法正确解析到 Server的7182端口</h5>
+<h5>   <font color="red">A:  </font>Agent端执行：  mv /usr/bin/host   /usr/bin/host_bak</h5>
+<h5>4  <font color="red">Q:  </font><img src="./CDH5.5.2--install_files/16.png"></h5>
+<h5>   <font color="red">A:  </font>这个问题比较棘手，日志信息价值不大。Cloudera 官方社区也未解决，建议修改 /opt 目录权限为777</h5>
+<h5>5  <font color="red">Q:  </font>Hive中关于数据库的问题</h5>
+<h5>   <font color="red">A:  </font>一般是缺少相应的jar包，将 JDBC 的jar包复制到 /opt/cloudera/parcels/CDH-5.5.2-1.cdh5.0.0.p0.47/lib/hive/lib/ 目录下即可</h5>
+<h5>6  <font color="red">Q:  </font>Yarn服务无法启动</h5>
+<p><code>报错信息：
+Error found before invoking supervisord: dictionary update sequence element #78 has length1; 2 is required</code></p>
+<h5>   <font color="red">A:  </font></h5>
+<p><code>这个错误是CM的一个bug，解决方法为修改/opt/cm-5.3.0/lib64/cmf/agent/src/cmf/util.py文件。将其中的代码：
+pipe = subprocess.Popen(['/bin/bash', '-c', ". %s; %s; env" %(path, command)],stdout=subprocess.PIPE, env=caller_env)</code>
+修改为：<br>
+<code>pipe = subprocess.Popen(['/bin/bash', '-c', ". %s; %s; env |grep -v { | grep -v }" % (path,command)],stdout=subprocess.PIPE, env=caller_env)</code>  
+</p>
+<h5>7  <font color="red">Q:  </font>其它未知问题</h5>
+<h5>   <font color="red">A:  </font>建议重做系统。当服务经过多次安装后，原本前几步中正常状态的服务很可能会失败，此时建议重做系统。</h5>
+<p style="background:grey"><font size="5" color="yellow">"人不能两次踏进同一条河流" 同样，具体到每次的安装，环境也不一样。遇到问题，还是多 Google一下吧。</font><font size="1" color="yellow">百度真的很坑,个人见解</font></p>
+
+
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
+</body></html>
